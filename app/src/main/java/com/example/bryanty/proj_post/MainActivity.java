@@ -1,12 +1,14 @@
 package com.example.bryanty.proj_post;
 
 import android.content.Intent;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.example.bryanty.proj_post.navigation_drawer.NavigationDrawerFragment;
 
 
 public class MainActivity extends ActionBarActivity {
@@ -18,9 +20,14 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //app bar intial
+        //initial app bar
         toolbar= (Toolbar)findViewById(R.id.app_Bar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+
+        //initial navigation drawer
+        NavigationDrawerFragment navDrawerFragment= (NavigationDrawerFragment)getFragmentManager().findFragmentById(R.id.fragment_navigation_drawer);
+        navDrawerFragment.setUp((DrawerLayout)findViewById(R.id.drawer_layout), toolbar, R.id.fragment_navigation_drawer);
     }
 
     @Override
