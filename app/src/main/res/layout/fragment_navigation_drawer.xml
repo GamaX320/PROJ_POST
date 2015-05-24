@@ -1,4 +1,4 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -6,6 +6,7 @@
     tools:context="com.example.bryanty.proj_post.navigation_drawer.NavigationDrawerFragment">
 
     <LinearLayout
+        android:id="@+id/coverContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -19,4 +20,14 @@
 
     </LinearLayout>
 
-</FrameLayout>
+    <!-- recyclerview drawer item-->
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/drawerItem"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/coverContainer">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+</RelativeLayout>

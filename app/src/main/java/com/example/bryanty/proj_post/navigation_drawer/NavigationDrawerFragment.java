@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +16,15 @@ import android.view.ViewGroup;
 
 import com.example.bryanty.proj_post.R;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * A simple {@link Fragment} subclass.
  */
 public class NavigationDrawerFragment extends Fragment {
 
+    //navigation drawer
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
 
@@ -27,6 +33,10 @@ public class NavigationDrawerFragment extends Fragment {
     public static final String PREF_FILE_NAME= "user_pref";
     public static final String USER_FIRST_TIME_DRAWER= "user_first_time_drawer";
     private View fragmentNavDrawer;
+
+    //drawer item
+    private RecyclerView recyclerView_drawerItem;
+    private DrawerItemAdapter adapter;
 
     public NavigationDrawerFragment() {
         // Required empty public constructor
@@ -48,7 +58,15 @@ public class NavigationDrawerFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+        View view= inflater.inflate(R.layout.fragment_navigation_drawer, container, false);
+
+        //initial recycler view drawer item
+        recyclerView_drawerItem= (RecyclerView)view.findViewById(R.id.drawerItem);
+        adapter= new DrawerItemAdapter(getActivity(), getData());
+        recyclerView_drawerItem.setAdapter(adapter);
+        recyclerView_drawerItem.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        return view;
     }
 
     //setup all component inside navigation drawer- call this method to setup navigation drawer
@@ -106,6 +124,21 @@ public class NavigationDrawerFragment extends Fragment {
     public static String readPreference(Context context, String name, String value){
         SharedPreferences sharedPreferences= context.getSharedPreferences(PREF_FILE_NAME, Context.MODE_PRIVATE);
         return sharedPreferences.getString(name, value);
+    }
+
+    //get all drawer item data
+    public static List<DrawerItem> getData(){
+        List<DrawerItem> item= new ArrayList<>();
+        int[] icons= {R.mipmap.ic_home, R.mipmap.ic_post, R.mipmap.ic_bookmarks, R.mipmap.ic_subscription, R.mipmap.ic_settings};
+        String[] titles= {"Home", "My Posts", "Bookmarks", "Subscriptions", "Settings"};
+
+        for(int a=0; a< icons.length && a< titles.length; a++){
+            DrawerItem currentItem= new DrawerItem();
+            currentItem.drawerIcon= icons[a];
+            currentItem.drawerString= titles[a];
+            item.add(currentItem);
+        }
+        return item;
     }
 
 }
