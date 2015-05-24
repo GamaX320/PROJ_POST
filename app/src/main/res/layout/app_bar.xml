@@ -6,5 +6,6 @@
     android:background="@color/primaryColor"
     app:theme="@style/ThemeOverlay.AppCompat.Dark"
     app:popupTheme="@style/ThemeOverlay.AppCompat.Light">
+    <!-- android:paddingTop="@dimen/appbar_top_padding" to make transparency effect-->
 
 </android.support.v7.widget.Toolbar>

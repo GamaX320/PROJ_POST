@@ -1,14 +1,22 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/navDrawerBackgroundColor"
     tools:context="com.example.bryanty.proj_post.navigation_drawer.NavigationDrawerFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content">
 
-</RelativeLayout>
+        <!-- layout margin top(24dp) <v21,(48dp) >v21 is to hack status bar transparency effect-->
+        <ImageView
+            android:layout_width="@dimen/nav_cover_width"
+            android:layout_height="@dimen/nav_cover_height"
+            android:layout_marginBottom="16dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/cover"/>
+
+    </LinearLayout>
+
+</FrameLayout>
