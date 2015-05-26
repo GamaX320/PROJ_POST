@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.bryanty.proj_post.R;
 
@@ -20,10 +21,12 @@ public class DrawerItemAdapter extends RecyclerView.Adapter<DrawerItemAdapter.Dr
 
     private LayoutInflater inflater;
     List<DrawerItem> item= Collections.emptyList();
+    private Context context;
 
     public DrawerItemAdapter(Context context, List<DrawerItem> item){
         inflater= LayoutInflater.from(context);
         this.item= item;
+        this.context= context;
     }
 
     @Override
@@ -48,8 +51,13 @@ public class DrawerItemAdapter extends RecyclerView.Adapter<DrawerItemAdapter.Dr
         return item.size();
     }
 
+    public void delete(int position){
+        item.remove(position);
+        notifyItemRemoved(position);
+    }
+
     //view holder
-    class DrawerItemViewHolder extends RecyclerView.ViewHolder{
+    class DrawerItemViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
 
         ImageView drawerIcon;
         TextView drawerString;
@@ -59,6 +67,16 @@ public class DrawerItemAdapter extends RecyclerView.Adapter<DrawerItemAdapter.Dr
             drawerIcon= (ImageView)itemView.findViewById(R.id.drawerIcon);
             drawerString= (TextView)itemView.findViewById(R.id.drawerString);
 
+            //initial drawer item set onClick listener
+            drawerIcon.setOnClickListener(this);
+            //drawerString.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+
+            Toast.makeText(context, "Item clicked at "+getPosition(), Toast.LENGTH_SHORT).show();
+            delete(getPosition());
         }
     }
 }

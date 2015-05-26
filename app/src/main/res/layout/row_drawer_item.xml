@@ -22,7 +22,6 @@
         android:layout_marginRight="16dp"
         android:layout_gravity="center_vertical"
         android:layout_centerVertical="true"
-        android:textColor="#000000"
         android:text="Item Title" />
 
 </RelativeLayout>
