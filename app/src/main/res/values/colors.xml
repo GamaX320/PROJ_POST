@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primaryColor">#3f51b5</color>
-    <color name="primaryDarkColor">#303f9f</color>
-    <color name="accentColor">#e91e63</color>
-    <color name="navDrawerBackgroundColor">#FFF</color>
+    <color name="primaryColor">#3F51B5</color>
+    <color name="primaryDarkColor">#303F9F</color>
+    <color name="accentColor">#FF4081</color>
+    <color name="primaryLightColor">#C5CAE9</color>
+    <color name="primaryTextColor">#212121</color>
+    <color name="secondaryTextColor">#727272</color>
+    <color name="dividerColor">#B6B6B6</color>
+    <color name="textColor">#FFFFFF</color>
+
+    <color name="navDrawerBackgroundColor">#FFFFFF</color>
 </resources>
