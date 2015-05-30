@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.app.FragmentManager;
+//import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,8 +20,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.example.bryanty.proj_post.MainActivity;
 import com.example.bryanty.proj_post.R;
 import com.example.bryanty.proj_post.TestActivity;
+import com.example.bryanty.proj_post.fragment.BookmarksFragment;
+import com.example.bryanty.proj_post.fragment.HomeFragment;
+import com.example.bryanty.proj_post.fragment.PostFragment;
+import com.example.bryanty.proj_post.fragment.SubscriptionFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,6 +86,9 @@ public class NavigationDrawerFragment extends Fragment{
             public void drawerItemOnClick(View view, int position) {
                 //implement your item onClick listener here
                 Toast.makeText(getActivity(), "onClick "+position,Toast.LENGTH_SHORT).show();
+                getContent(position);
+                mDrawerLayout.closeDrawers();
+
             }
 
             @Override
@@ -149,10 +159,12 @@ public class NavigationDrawerFragment extends Fragment{
     }
 
     //get all drawer item data
-    public static List<DrawerItem> getData(){
+    // public static List<DrawerItem> getData(){
+    public List<DrawerItem> getData(){
         List<DrawerItem> item= new ArrayList<>();
         int[] icons= {R.mipmap.ic_home, R.mipmap.ic_post, R.mipmap.ic_bookmarks, R.mipmap.ic_subscription, R.mipmap.ic_settings};
-        String[] titles= {"Home", "My Posts", "Bookmarks", "Subscriptions", "Settings"};
+        //String[] titles= {"Home", "My Posts", "Bookmarks", "Subscriptions", "Settings"};
+        String[] titles= getResources().getStringArray(R.array.navigation_drawer_item);
 
         for(int a=0; a< icons.length && a< titles.length; a++){
             DrawerItem currentItem= new DrawerItem();
@@ -160,8 +172,35 @@ public class NavigationDrawerFragment extends Fragment{
             currentItem.drawerString= titles[a];
             item.add(currentItem);
         }
+
         return item;
     }
+
+    //determine which content should load
+    public  void getContent(int position){
+        Fragment fragment= null;
+        FragmentManager fm= getActivity().getFragmentManager();
+
+        switch (position){
+            case 0:
+                fragment= new HomeFragment();
+                break;
+            case 1:
+                fragment= new PostFragment();
+                break;
+            case 2:
+                fragment= new BookmarksFragment();
+                break;
+            case 3:
+                fragment= new SubscriptionFragment();
+                break;
+        }
+
+        fm.beginTransaction().replace(R.id.container, fragment).commit();
+        //set action bar title based on the fragment selected
+        ((MainActivity) getActivity()).setTitle(getResources().getStringArray(R.array.navigation_drawer_item)[position]);
+    }
+
 
 //    //drawer item onClick listener
 //    @Override
